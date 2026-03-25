@@ -211,12 +211,12 @@ class Converter
         $mpdf->WriteHTML($mainHtml);
 
         // 5. Add the Terms & Conditions as a separate final page
-        // Use AddPage with suppression 'on' and 0 margins for header/footer
-        $mpdf->AddPage('P', '', '', '', 'on', 15, 15, 15, 15, 0, 0); 
-        
-        // Clear them specifically for the new page buffer
+        // We clear them BEFORE adding the new page so mPDF applies the empty state to the new page
         $mpdf->SetHTMLHeader('');
         $mpdf->SetHTMLFooter('');
+        
+        // AddPage with suppression 'on' and 0 margins for header/footer
+        $mpdf->AddPage('P', '', '', '', 'on', 15, 15, 15, 15, 0, 0); 
 
         $termsHtml = $this->viewFactory->make('quotation-pkg::pdf_terms', ['quotation' => $this->data])->render();
         $mpdf->WriteHTML($termsHtml);
