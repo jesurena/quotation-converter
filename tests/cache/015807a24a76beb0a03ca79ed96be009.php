@@ -1,9 +1,9 @@
-<div class="w-full text-base">
-    <table class="w-full border-collapse table-fixed">
+<div style="width: 100%; font-size: 12px;">
+    <table style="width: 100%; border-collapse: collapse; table-layout: fixed;">
         <tr>
-            <td class="align-top" style="width: 65%; padding-right: 20px;">
-                <div class="max-w-85">
-                    <div class="max-w-100 overflow-hidden block text-xs text-justify">
+            <td style="vertical-align: top; width: 65%; padding-right: 20px;">
+                <div style="max-width: 85%;">
+                    <div style="max-width: 100%; overflow: hidden; display: block; font-size: 10px; text-align: justify;">
                         <?php if(($quotation->companyCode ?? $quotation->CompanyCode ?? 1) == 2): ?>
                             The above quotation is subject to the terms and conditions of sale printed on the last
                             page. Unless advised of any modification within fifteen (15) days from date this
@@ -20,24 +20,24 @@
                     </div>
                 </div>
 
-                <div class="mt-8 text-sm">
-                    <div class="font-bold ">Terms and conditions accepted:</div>
+                <div style="margin-top: 32px;">
+                    <div style="font-weight: bold; font-size: 11px;">Terms and conditions accepted:</div>
                     <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
                         <tr>
-                            <td class="pt-4">Customer Name and Signature: _______________________________</td>
+                            <td style="padding-top: 16px; font-size: 11px;">Customer Name and Signature: _______________________________</td>
                         </tr>
                         <tr>
-                            <td class="pt-1">Date: ____________________________________________________</td>
+                            <td style="padding-top: 4px; font-size: 11px;">Date: ____________________________________________________</td>
                         </tr>
                     </table>
                 </div>
             </td>
-            <td class="align-top text-sm" style="width: 35%;">
-                <strong class="font-bold">Very Truly Yours,</strong><br><br>
+            <td style="vertical-align: top; font-size: 11px; width: 35%;">
+                <strong style="font-weight: bold;">Very Truly Yours,</strong><br><br>
                 <?php if(($quotation->companyCode ?? $quotation->CompanyCode ?? 1) == 2): ?>
-                    <strong class="font-bold">ICS ICT SUPPORT SERVICES CORPORATION</strong>
+                    <strong style="font-weight: bold;">ICS ICT SUPPORT SERVICES CORPORATION</strong>
                 <?php else: ?>
-                    <strong class="font-bold">INTEGRATED COMPUTER SYSTEMS, INC.</strong>
+                    <strong style="font-weight: bold;">INTEGRATED COMPUTER SYSTEMS, INC.</strong>
                 <?php endif; ?>
 
                 <div style="height: 60px;">
@@ -46,8 +46,8 @@
                     <?php endif; ?>
                 </div>
 
-                <div class="mt-1">
-                    <strong class="font-bold uppercase">
+                <div style="margin-top: 4px;">
+                    <strong style="font-weight: bold; text-transform: uppercase;">
                         <?php
                             $accountId = null;
                             if (class_exists('Session')) {

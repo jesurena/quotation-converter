@@ -1,19 +1,19 @@
-<div class="w-full">
-    <table class="w-full border-collapse table-fixed">
+<div style="width: 100%;">
+    <table style="width: 100%; border-collapse: collapse; table-layout: fixed;">
         <tr>
-            <td class="align-top" style="width: 8%;">
+            <td style="vertical-align: top; width: 8%;">
                 @if($quotation->company->logo)
-                    <img src="{{ $quotation->company->logo }}" style="width: 65px; height: auto; margin-left: -10px; margin-top: -5px;">
+                    <img src="{{ $quotation->company->logo }}" style="width: 65px; height: auto; margin-left: -10px; margin-top: -10px;">
                 @endif
             </td>
-            <td class="align-top" style="width: 62%;">
-                <div class="font-bold uppercase text-2xl">INTEGRATED COMPUTER SYSTEMS, INC.</div>
-                <div class="text-xs" style="color: #333;">
+            <td style="vertical-align: top; width: 62%;">
+                <div style="font-weight: bold; text-transform: uppercase; font-size: 17px;">INTEGRATED COMPUTER SYSTEMS, INC.</div>
+                <div style="font-size: 10px; color: #333;">
                     3/F Limketkai Building, Ortigas Avenue<br>
                     San Juan, Metro Manila, 1502 Philippines
                 </div>
             </td>
-            <td class="align-top text-right text-xs" style="width: 30%;">
+            <td style="vertical-align: top; text-align: right; font-size: 10px; width: 30%;">
                 Tel. No. (+632) 8689-5000<br>
                 Fax No. (+632) 8721-4502<br>
                 Email: info@ics.com.ph<br>
@@ -21,20 +21,20 @@
             </td>
         </tr>
     </table>
-    <div class="w-full mb-3">
-        <table class="w-full border-collapse table-fixed">
+    <div style="width: 100%; margin-bottom: 12px;">
+        <table style="width: 100%; border-collapse: collapse; table-layout: fixed;">
             <tr>
-                <td class="align-top" style="width: 60%;">
-                    <div class="font-bold uppercase text-lg">{{ $quotation->client->name }}</div>
-                    <div class="text-base" style="line-height: 1.3;">
+                <td style="vertical-align: top; width: 60%;">
+                    <div style="font-weight: bold; text-transform: uppercase; font-size: 13px;">{{ $quotation->client->name }}</div>
+                    <div style="font-size: 11px; line-height: 1.3;">
                         {!! nl2br(e($quotation->client->address)) !!}
                     </div>
                     <br>
                     @if($quotation->client->contactPerson)
-                        <div class="font-bold uppercase text-base">ATTN : {{ $quotation->client->contactPerson }}</div>
+                        <div style="font-weight: bold; text-transform: uppercase; font-size: 11px;">ATTN : {{ $quotation->client->contactPerson }}</div>
                     @endif
                 </td>
-                <td class="align-top text-base" style="width: 35%; text-align: right;">
+                <td style="vertical-align: top; font-size: 11px; width: 35%; text-align: right;">
                     <div style="display: inline-block; text-align: left;">
                         <div>Date: {{ $quotation->date }}</div>
                         <div>Ref.No: {{ $quotation->id }}</div>
@@ -44,7 +44,7 @@
         </table>
     </div>
 
-    <div class="mb-1 text-base">
-        <span class="uppercase">GENTLEMEN:</span> We are pleased to submit for your kind consideration and approval our quotation for the following items.
+    <div style="margin-bottom: 4px; font-size: 11px;">
+        <span style="text-transform: uppercase;">GENTLEMEN:</span> We are pleased to submit for your kind consideration and approval our quotation for the following items.
     </div>
 </div>
