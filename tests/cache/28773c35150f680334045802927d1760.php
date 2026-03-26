@@ -19,11 +19,13 @@
             margin: 40px 50px; 
         }
 
-        .header-container {
-            width: 100%;
-            margin-bottom: 10px;
+        header {
+            position: fixed;
+            top: -20px;
+            left: 0;
+            right: 0;
+            height: 200px;
         }
-
   
         footer {
             position: fixed;
@@ -34,6 +36,7 @@
         }
 
         body {
+            margin-top: 180px;
             margin-bottom: 160px;
         }
 
@@ -106,23 +109,36 @@
     </style>
 </head>
 <body>
+    <header>
+        <?php echo $__env->make('components.header', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+    </header>
+
     <footer>
         <?php echo $__env->make('components.footer', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
         <script type="text/php">
             if ( isset($pdf) ) {
-                $font = $fontMetrics->get_font("Times New Roman", "normal");
-                $pdf->page_text(500, 815, "Page {PAGE_NUM} of {PAGE_COUNT}", $font, 9, array(0,0,0));
+                $pdf->page_script('
+                    if ($PAGE_NUM < $PAGE_COUNT) {
+                        $font = $fontMetrics->get_font("Times New Roman", "normal");
+                        $pdf->text(500, 815, "Page " . $PAGE_NUM . " of " . ($PAGE_COUNT), $font, 9, array(0,0,0));
+                    }
+                ');
             }
         </script>
     </footer>
 
-    <!-- Main Quotation Section -->
-    <div class="header-container">
-        <?php echo $__env->make('components.header', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
-    </div>
-
     <div class="content-container">
         <?php echo $__env->make('components.quotation_table', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+    </div>
+
+    <div style="page-break-before: always; position: relative;">
+        <div style="position: absolute; top: -500px; left: -500px; width: 2000px; height: 3000px; background-color: #ffffff; z-index: 900;"></div>
+        
+        <div style="position: relative; z-index: 1000;">
+            <div style="margin-top: -160px; padding-top: 40px;">
+                <?php echo $__env->make('components.terms', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+            </div>
+        </div>
     </div>
 </body>
 </html>
