@@ -1,6 +1,6 @@
 
 <div style="width: 100%;">
-    <table style="width: 100%; border-collapse: collapse; table-layout: fixed; font-family: 'Times New Roman', serif; font-size: 11px;">
+    <table style="width: 100%; border-collapse: collapse; font-family: 'Times New Roman', serif; font-size: 11px;">
         <thead>
             <tr>
                 <th colspan="4" style="border: none; padding: 0; padding-bottom: 10px; font-weight: normal; text-align: left; vertical-align: top;">
@@ -14,11 +14,6 @@
                 <th style="padding: 4px; font-weight: bold; text-align: center; font-size: 13px; border-bottom: 1.5px solid #000; border-top: 1.5px solid #000; border-right: 1.5px solid #000; width: 20%;">Total</th>
             </tr>
         </thead>
-        <tfoot>
-            <tr>
-                <td colspan="4" style="border-top: 1.5px solid #000; padding: 0; height: 0; line-height: 0;"></td>
-            </tr>
-        </tfoot>
         <tbody>
 
         <?php $count = count($quotation->lineItems); ?>
@@ -63,18 +58,18 @@
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
             <tr>
-                <td style="padding: 4px; border-top: 1.5px solid #000; border-left: 1.5px solid #000;"></td>
-                <td style="padding: 4px; text-align: right; font-weight: bold; font-size: 12px; border-top: 1.5px solid #000; border-right: 1.5px solid #000;">TOTAL AMOUNT:</td>
-                <td style="padding: 4px; border-top: 1.5px solid #000;"></td>
-                <td style="padding: 4px; text-align: right; font-weight: bold; font-size: 11px; border-top: 1.5px solid #000; border-right: 1.5px solid #000;">
-                    <?php echo e($quotation->currency); ?> <?php echo e(number_format($quotation->totals->grandTotal, 2)); ?>
+                <td style="padding: 4px; border-left: 1.5px solid #000; border-right: 1.5px solid #000;"></td>
+                <td style="padding: 4px; border-right: 1.5px solid #000;"></td>
+                <td style="padding: 4px; text-align: right; font-weight: bold; font-size: 12px; border-right: 1.5px solid #000;">Total <?php echo e($quotation->currency); ?></td>
+                <td style="padding: 4px; text-align: right; font-weight: bold; font-size: 11px; border-right: 1.5px solid #000;">
+                    <?php echo e(number_format($quotation->totals->grandTotal, 2)); ?>
 
                 </td>
             </tr>
 
             <tr>
-                <td style="padding: 4px; border-top: 1.5px solid #000; border-right: 1.5px solid #000; border-bottom: 1.5px solid #000; border-left: 1.5px solid #000;"></td>
-                <td style="vertical-align: top; font-size: 10px; border-top: 1.5px solid #000; border-right: 1.5px solid #000; border-bottom: 1.5px solid #000; padding: 8px;">
+                <td style="padding: 4px; border-right: 1.5px solid #000; border-bottom: 1.5px solid #000; border-left: 1.5px solid #000;"></td>
+                <td style="vertical-align: top; font-size: 10px; border-right: 1.5px solid #000; border-bottom: 1.5px solid #000; padding: 8px;">
                     <?php if($quotation->showWarranty && $quotation->warranty): ?>
                         <div style="margin-bottom: 4px;">
                             <div style="font-weight: bold;">Warranty:</div> <?php echo nl2br(e($quotation->warranty)); ?>
@@ -118,8 +113,8 @@
                         4. Above quoted prices are VAT-inclusive.
                     </div>
                 </td>
-                <td style="padding: 4px; border-top: 1.5px solid #000; border-right: 1.5px solid #000; border-bottom: 1.5px solid #000;"></td>
-                <td style="padding: 4px; border-top: 1.5px solid #000; border-bottom: 1.5px solid #000; border-right: 1.5px solid #000;"></td>
+                <td style="padding: 4px; border-right: 1.5px solid #000; border-bottom: 1.5px solid #000;"></td>
+                <td style="padding: 4px; border-bottom: 1.5px solid #000; border-right: 1.5px solid #000;"></td>
             </tr>
         </tbody>
     </table>

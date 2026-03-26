@@ -1,6 +1,6 @@
 
 <div style="width: 100%;">
-    <table style="width: 100%; border-collapse: collapse; table-layout: fixed; font-family: 'Times New Roman', serif; font-size: 11px;">
+    <table style="width: 100%; border-collapse: collapse; font-family: 'Times New Roman', serif; font-size: 11px;">
         <thead>
             <tr>
                 <th colspan="4" style="border: none; padding: 0; padding-bottom: 10px; font-weight: normal; text-align: left; vertical-align: top;">
@@ -55,17 +55,17 @@
         @endforeach
 
             <tr>
-                <td style="padding: 4px; border-top: 1.5px solid #000; border-left: 1.5px solid #000;"></td>
-                <td style="padding: 4px; text-align: right; font-weight: bold; font-size: 12px; border-top: 1.5px solid #000; border-right: 1.5px solid #000;">TOTAL AMOUNT:</td>
-                <td style="padding: 4px; border-top: 1.5px solid #000;"></td>
-                <td style="padding: 4px; text-align: right; font-weight: bold; font-size: 11px; border-top: 1.5px solid #000; border-right: 1.5px solid #000;">
-                    {{ $quotation->currency }} {{ number_format($quotation->totals->grandTotal, 2) }}
+                <td style="padding: 4px; border-left: 1.5px solid #000; border-right: 1.5px solid #000;"></td>
+                <td style="padding: 4px; border-right: 1.5px solid #000;"></td>
+                <td style="padding: 4px; text-align: right; font-weight: bold; font-size: 12px; border-right: 1.5px solid #000;">Total {{ $quotation->currency }}</td>
+                <td style="padding: 4px; text-align: right; font-weight: bold; font-size: 11px; border-right: 1.5px solid #000;">
+                    {{ number_format($quotation->totals->grandTotal, 2) }}
                 </td>
             </tr>
 
             <tr>
-                <td style="padding: 4px; border-top: 1.5px solid #000; border-right: 1.5px solid #000; border-bottom: 1.5px solid #000; border-left: 1.5px solid #000;"></td>
-                <td style="vertical-align: top; font-size: 10px; border-top: 1.5px solid #000; border-right: 1.5px solid #000; border-bottom: 1.5px solid #000; padding: 8px;">
+                <td style="padding: 4px; border-right: 1.5px solid #000; border-bottom: 1.5px solid #000; border-left: 1.5px solid #000;"></td>
+                <td style="vertical-align: top; font-size: 10px; border-right: 1.5px solid #000; border-bottom: 1.5px solid #000; padding: 8px;">
                     @if($quotation->showWarranty && $quotation->warranty)
                         <div style="margin-bottom: 4px;">
                             <div style="font-weight: bold;">Warranty:</div> {!! nl2br(e($quotation->warranty)) !!}
@@ -104,8 +104,8 @@
                         4. Above quoted prices are VAT-inclusive.
                     </div>
                 </td>
-                <td style="padding: 4px; border-top: 1.5px solid #000; border-right: 1.5px solid #000; border-bottom: 1.5px solid #000;"></td>
-                <td style="padding: 4px; border-top: 1.5px solid #000; border-bottom: 1.5px solid #000; border-right: 1.5px solid #000;"></td>
+                <td style="padding: 4px; border-right: 1.5px solid #000; border-bottom: 1.5px solid #000;"></td>
+                <td style="padding: 4px; border-bottom: 1.5px solid #000; border-right: 1.5px solid #000;"></td>
             </tr>
         </tbody>
     </table>
