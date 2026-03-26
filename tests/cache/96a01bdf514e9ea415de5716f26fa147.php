@@ -1,11 +1,11 @@
-<div style="z-index: 1000; padding-top: 0;">
-    <div style="text-align: center; margin-bottom: 32px;">
-        <b style="text-transform: uppercase; font-size: 20px;">TERMS AND CONDITIONS</b>
+<div style="z-index: 1000; padding-top: 20px; font-family: 'Times New Roman', serif;">
+    <div style="text-align: center; margin-bottom: 30px;">
+        <b style="text-transform: uppercase; font-size: 28px;">TERMS AND CONDITIONS</b>
     </div>
 
-    <table style="width: 100%; border-collapse: collapse; table-layout: fixed; border-spacing: 16px 0;">
+    <table style="width: 100%; border-collapse: collapse; table-layout: fixed; border-spacing: 16px 0; font-family: 'Times New Roman', serif;">
         <tr>
-            <td style="vertical-align: top; font-size: 11px; text-align: justify; width: 50%; padding-right: 16px; line-height: 1.5; letter-spacing: 0.5px;">
+            <td style="vertical-align: top; font-size: 13px; text-align: justify; width: 50%; padding-right: 16px; line-height: 1.7; letter-spacing: 0.5px;">
                 <p>Integrated Computer Systems, Inc. ("ICSI") agrees to sell, and the 
                 "Customer" agrees to accept on the following terms and conditions of
                 the product(s) listed on the other side of this agreement. The customer
@@ -54,12 +54,13 @@
                 its normal use from the date of delivery.</p>
 
                 <p>If examination by ICSI discloses that the product has been defective, 
-                then its obligation is limited to repair or replacement, at its sole discretion, of the defective unit or its components.</p>
+                then its obligation is limited to repair or replacement, at its sole discretion, of the defective unit or its components.
+                ICSI is</p>
             </td>
 
-            <td style="vertical-align: top; font-size: 11px; text-align: justify; width: 50%; padding-left: 16px; line-height: 1.5; letter-spacing: 0.5px;">
+            <td style="vertical-align: top; font-size: 13px; text-align: justify; width: 50%; padding-left: 16px; line-height: 1.7; letter-spacing: 0.5px;">
                 <p>
-                ICSI is not responsible for products which have been subject to misuse, alteration, 
+                 responsible for products which have been subject to misuse, alteration, 
                 accident or for repairs not performed by ICSI. 
                 ICSI shall not be responsible for any incidental
                 or consequential damages arising from any 

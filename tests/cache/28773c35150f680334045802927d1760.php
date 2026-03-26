@@ -118,10 +118,10 @@
         <?php echo $__env->make('components.quotation_table', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
     </div>
 
-    <div style="page-break-before: always; position: relative;">
+    <div style="page-break-before: always; position: relative; min-height: 980px; overflow: visible;">
         <div style="position: absolute; bottom: -160px; left: -60px; width: 1000px; height: 300px; background-color: #ffffff; z-index: 900;"></div>
         
-        <div style="position: relative; z-index: 1000;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; z-index: 1000;">
             <?php echo $__env->make('components.terms', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
         </div>
     </div>

@@ -1,7 +1,7 @@
 
 <div style="width: 100%;">
     <table style="width: 100%; border-collapse: collapse; font-family: 'Times New Roman', serif; font-size: 11px;">
-        <thead>
+        <thead style="display: table-header-group;">
             <tr>
                 <th colspan="4" style="border: none; padding: 0; padding-bottom: 10px; font-weight: normal; text-align: left; vertical-align: top;">
                     <?php echo $__env->make('components.header', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
