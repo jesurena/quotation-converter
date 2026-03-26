@@ -19,14 +19,6 @@
             margin: 40px 50px; 
         }
 
-        header {
-            position: fixed;
-            top: -20px;
-            left: 0;
-            right: 0;
-            height: 200px;
-        }
-  
         footer {
             position: fixed;
             bottom: 0;
@@ -36,7 +28,6 @@
         }
 
         body {
-            margin-top: 180px;
             margin-bottom: 160px;
         }
 
@@ -109,10 +100,6 @@
     </style>
 </head>
 <body>
-    <header>
-        @include('components.header')
-    </header>
-
     <footer>
         @include('components.footer')
         <script type="text/php">
@@ -132,12 +119,10 @@
     </div>
 
     <div style="page-break-before: always; position: relative;">
-        <div style="position: absolute; top: -500px; left: -500px; width: 2000px; height: 3000px; background-color: #ffffff; z-index: 900;"></div>
+        <div style="position: absolute; bottom: -160px; left: -60px; width: 1000px; height: 300px; background-color: #ffffff; z-index: 900;"></div>
         
         <div style="position: relative; z-index: 1000;">
-            <div style="margin-top: -160px; padding-top: 40px;">
-                @include('components.terms')
-            </div>
+            @include('components.terms')
         </div>
     </div>
 </body>

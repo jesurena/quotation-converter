@@ -1,12 +1,17 @@
 
 <div style="width: 100%;">
-    <table style="width: 100%; border: 1.5px solid #000; border-collapse: collapse; table-layout: fixed; font-family: 'Times New Roman', serif; font-size: 11px;">
+    <table style="width: 100%; border-collapse: collapse; table-layout: fixed; font-family: 'Times New Roman', serif; font-size: 11px;">
         <thead>
             <tr>
-                <th style="padding: 4px; font-weight: bold; text-align: center; font-size: 13px; border-bottom: 1.5px solid #000; border-right: 1.5px solid #000; width: 10%;">QTY</th>
-                <th style="padding: 4px; font-weight: bold; text-align: center; font-size: 13px; border-bottom: 1.5px solid #000; border-right: 1.5px solid #000; width: 50%;">Description</th>
-                <th style="padding: 4px; font-weight: bold; text-align: center; font-size: 13px; border-bottom: 1.5px solid #000; border-right: 1.5px solid #000; width: 20%;">Unit Price</th>
-                <th style="padding: 4px; font-weight: bold; text-align: center; font-size: 13px; border-bottom: 1.5px solid #000; width: 20%;">Total</th>
+                <th colspan="4" style="border: none; padding: 0; padding-bottom: 10px; font-weight: normal; text-align: left; vertical-align: top;">
+                    @include('components.header')
+                </th>
+            </tr>
+            <tr>
+                <th style="padding: 4px; font-weight: bold; text-align: center; font-size: 13px; border-bottom: 1.5px solid #000; border-right: 1.5px solid #000; border-top: 1.5px solid #000; border-left: 1.5px solid #000; width: 10%;">QTY</th>
+                <th style="padding: 4px; font-weight: bold; text-align: center; font-size: 13px; border-bottom: 1.5px solid #000; border-right: 1.5px solid #000; border-top: 1.5px solid #000; width: 50%;">Description</th>
+                <th style="padding: 4px; font-weight: bold; text-align: center; font-size: 13px; border-bottom: 1.5px solid #000; border-right: 1.5px solid #000; border-top: 1.5px solid #000; width: 20%;">Unit Price</th>
+                <th style="padding: 4px; font-weight: bold; text-align: center; font-size: 13px; border-bottom: 1.5px solid #000; border-top: 1.5px solid #000; border-right: 1.5px solid #000; width: 20%;">Total</th>
             </tr>
         </thead>
         <tbody>
@@ -27,7 +32,7 @@
                     $pb = $lineIndex === (count($descLines) - 1) ? '8px' : '0';
                 @endphp
                 <tr>
-                    <td style="padding-left: 4px; padding-right: 4px; text-align: center; vertical-align: top; font-size: 11px; border-right: 1.5px solid #000; padding-top: {{ $pt }}; padding-bottom: {{ $pb }};">
+                    <td style="padding-left: 4px; padding-right: 4px; text-align: center; vertical-align: top; font-size: 11px; border-left: 1.5px solid #000; border-right: 1.5px solid #000; padding-top: {{ $pt }}; padding-bottom: {{ $pb }};">
                         @if($lineIndex === 0)
                             {{ number_format($item->quantity) }}
                         @endif
@@ -40,7 +45,7 @@
                             {{ number_format($item->unitPrice, 2) }}
                         @endif
                     </td>
-                    <td style="padding-left: 4px; padding-right: 4px; text-align: right; vertical-align: top; font-size: 11px; padding-top: {{ $pt }}; padding-bottom: {{ $pb }};">
+                    <td style="padding-left: 4px; padding-right: 4px; text-align: right; vertical-align: top; font-size: 11px; border-right: 1.5px solid #000; padding-top: {{ $pt }}; padding-bottom: {{ $pb }};">
                         @if($lineIndex === 0 && $item->showItemPrices)
                             {{ number_format($item->totalPrice, 2) }}
                         @endif
@@ -50,17 +55,17 @@
         @endforeach
 
             <tr>
-                <td style="padding: 4px; border-top: 1.5px solid #000;"></td>
+                <td style="padding: 4px; border-top: 1.5px solid #000; border-left: 1.5px solid #000;"></td>
                 <td style="padding: 4px; text-align: right; font-weight: bold; font-size: 12px; border-top: 1.5px solid #000; border-right: 1.5px solid #000;">TOTAL AMOUNT:</td>
                 <td style="padding: 4px; border-top: 1.5px solid #000;"></td>
-                <td style="padding: 4px; text-align: right; font-weight: bold; font-size: 11px; border-top: 1.5px solid #000;">
+                <td style="padding: 4px; text-align: right; font-weight: bold; font-size: 11px; border-top: 1.5px solid #000; border-right: 1.5px solid #000;">
                     {{ $quotation->currency }} {{ number_format($quotation->totals->grandTotal, 2) }}
                 </td>
             </tr>
 
             <tr>
-                <td style="padding: 4px; border-top: 1.5px solid #000; border-right: 1.5px solid #000;"></td>
-                <td style="vertical-align: top; font-size: 10px; border-top: 1.5px solid #000; border-right: 1.5px solid #000; padding: 8px;">
+                <td style="padding: 4px; border-top: 1.5px solid #000; border-right: 1.5px solid #000; border-bottom: 1.5px solid #000; border-left: 1.5px solid #000;"></td>
+                <td style="vertical-align: top; font-size: 10px; border-top: 1.5px solid #000; border-right: 1.5px solid #000; border-bottom: 1.5px solid #000; padding: 8px;">
                     @if($quotation->showWarranty && $quotation->warranty)
                         <div style="margin-bottom: 4px;">
                             <div style="font-weight: bold;">Warranty:</div> {!! nl2br(e($quotation->warranty)) !!}
@@ -99,8 +104,8 @@
                         4. Above quoted prices are VAT-inclusive.
                     </div>
                 </td>
-                <td style="padding: 4px; border-top: 1.5px solid #000; border-right: 1.5px solid #000;"></td>
-                <td style="padding: 4px; border-top: 1.5px solid #000;"></td>
+                <td style="padding: 4px; border-top: 1.5px solid #000; border-right: 1.5px solid #000; border-bottom: 1.5px solid #000;"></td>
+                <td style="padding: 4px; border-top: 1.5px solid #000; border-bottom: 1.5px solid #000; border-right: 1.5px solid #000;"></td>
             </tr>
         </tbody>
     </table>
