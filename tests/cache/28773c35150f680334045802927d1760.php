@@ -1,116 +1,129 @@
-<div style="width: 100%;">
-    <table style="width: 100%; border: 1.5px solid #000; border-collapse: collapse; table-layout: fixed; font-family: 'Times New Roman', serif; font-size: 11px;">
-        <thead>
-            <tr>
-                <th style="padding: 4px; font-weight: bold; text-align: center; font-size: 13px; border-bottom: 1.5px solid #000; border-right: 1.5px solid #000; width: 10%;">QTY</th>
-                <th style="padding: 4px; font-weight: bold; text-align: center; font-size: 13px; border-bottom: 1.5px solid #000; border-right: 1.5px solid #000; width: 50%;">Description</th>
-                <th style="padding: 4px; font-weight: bold; text-align: center; font-size: 13px; border-bottom: 1.5px solid #000; border-right: 1.5px solid #000; width: 20%;">Unit Price</th>
-                <th style="padding: 4px; font-weight: bold; text-align: center; font-size: 13px; border-bottom: 1.5px solid #000; width: 20%;">Total</th>
-            </tr>
-        </thead>
-        <tbody>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Quotation <?php echo e($quotation->id); ?></title>
+    <style>
+        @font-face {
+            font-family: 'Times New Roman';
+            font-weight: normal;
+            font-style: normal;
+        }
 
-        <?php $count = count($quotation->lineItems); ?>
-        <?php $__currentLoopData = $quotation->lineItems; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <?php 
-                // Normalize newlines and HTML line breaks to \n
-                $descRaw = preg_replace('/<br\s*\/?>/i', "\n", $item->description);
-                $descRaw = str_replace(["\r\n", "\r"], "\n", $descRaw);
-                $descLines = explode("\n", $descRaw);
-            ?>
+        * {
+            font-family: 'Times New Roman', serif;
+            font-size: 11px;
+        }
 
-            <?php $__currentLoopData = $descLines; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $lineIndex => $descLine): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <?php 
-                    $trimmedLine = trim($descLine); 
-                    $pt = $lineIndex === 0 ? '4px' : '0';
-                    $pb = $lineIndex === (count($descLines) - 1) ? '8px' : '0';
-                ?>
-                <tr>
-                    <td style="padding-left: 4px; padding-right: 4px; text-align: center; vertical-align: top; font-size: 11px; border-right: 1.5px solid #000; padding-top: <?php echo e($pt); ?>; padding-bottom: <?php echo e($pb); ?>;">
-                        <?php if($lineIndex === 0): ?>
-                            <?php echo e(number_format($item->quantity)); ?>
+        @page {
+            margin: 40px 50px; 
+        }
 
-                        <?php endif; ?>
-                    </td>
-                    <td style="padding-left: 4px; padding-right: 4px; vertical-align: top; font-size: 11px; border-right: 1.5px solid #000; padding-top: <?php echo e($pt); ?>; padding-bottom: <?php echo e($pb); ?>;">
-                        <div style="line-height: 1.4;"><?php echo $trimmedLine === '' ? '&nbsp;' : nl2br(e($descLine)); ?></div>
-                    </td>
-                    <td style="padding-left: 4px; padding-right: 4px; text-align: right; vertical-align: top; font-size: 11px; border-right: 1.5px solid #000; padding-top: <?php echo e($pt); ?>; padding-bottom: <?php echo e($pb); ?>;">
-                        <?php if($lineIndex === 0 && $item->showItemPrices): ?>
-                            <?php echo e(number_format($item->unitPrice, 2)); ?>
+        .header-container {
+            width: 100%;
+            margin-bottom: 10px;
+        }
 
-                        <?php endif; ?>
-                    </td>
-                    <td style="padding-left: 4px; padding-right: 4px; text-align: right; vertical-align: top; font-size: 11px; padding-top: <?php echo e($pt); ?>; padding-bottom: <?php echo e($pb); ?>;">
-                        <?php if($lineIndex === 0 && $item->showItemPrices): ?>
-                            <?php echo e(number_format($item->totalPrice, 2)); ?>
+  
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+        }
 
-                        <?php endif; ?>
-                    </td>
-                </tr>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        body {
+            margin-bottom: 160px;
+        }
 
-            <tr>
-                <td style="padding: 4px; border-top: 1.5px solid #000;"></td>
-                <td style="padding: 4px; text-align: right; font-weight: bold; font-size: 12px; border-top: 1.5px solid #000; border-right: 1.5px solid #000;">TOTAL AMOUNT:</td>
-                <td style="padding: 4px; border-top: 1.5px solid #000;"></td>
-                <td style="padding: 4px; text-align: right; font-weight: bold; font-size: 11px; border-top: 1.5px solid #000;">
-                    <?php echo e($quotation->currency); ?> <?php echo e(number_format($quotation->totals->grandTotal, 2)); ?>
+        .p-1 { padding: 4px; }
+        .p-2 { padding: 8px; }
+        .p-3 { padding: 12px; }
+        .p-4 { padding: 16px; }
+        
+        .px-1 { padding-left: 4px; padding-right: 4px; }
+        .px-2 { padding-left: 8px; padding-right: 8px; }
+        .px-3 { padding-left: 12px; padding-right: 12px; }
+        .px-4 { padding-left: 16px; padding-right: 16px; }
+        
+        .py-1 { padding-top: 4px; padding-bottom: 4px; }
+        .py-2 { padding-top: 8px; padding-bottom: 8px; }
+        .py-3 { padding-top: 12px; padding-bottom: 12px; }
+        .py-4 { padding-top: 16px; padding-bottom: 16px; }
 
-                </td>
-            </tr>
+        .pt-1 { padding-top: 4px; }
+        .pt-2 { padding-top: 8px; }
+        .pt-3 { padding-top: 12px; }
+        .pt-15 { padding-top: 15px; }
 
-            <tr>
-                <td style="padding: 4px; border-top: 1.5px solid #000; border-right: 1.5px solid #000;"></td>
-                <td style="vertical-align: top; font-size: 10px; border-top: 1.5px solid #000; border-right: 1.5px solid #000; padding: 8px;">
-                    <?php if($quotation->showWarranty && $quotation->warranty): ?>
-                        <div style="margin-bottom: 4px;">
-                            <div style="font-weight: bold;">Warranty:</div> <?php echo nl2br(e($quotation->warranty)); ?>
+        .pb-1 { padding-bottom: 4px; }
+        .pb-2 { padding-bottom: 8px; }
+        .pb-3 { padding-bottom: 12px; }
+        .pb-4 { padding-bottom: 16px; }
 
-                        </div>
-                    <?php endif; ?>
+        .mt-1 { margin-top: 4px; }
+        .mt-2 { margin-top: 8px; }
+        .mt-8 { margin-top: 32px; }
 
-                    <?php if($quotation->showAvailability && $quotation->availability): ?>
-                        <div style="margin-bottom: 4px;">
-                            <div style="font-weight: bold;">Availability:</div> <?php echo nl2br(e($quotation->availability)); ?>
+        .mb-1 { margin-bottom: 4px; }
+        .mb-2 { margin-bottom: 8px; }
+        .mb-3 { margin-bottom: 12px; }
+        .mb-8 { margin-bottom: 32px; }
 
-                        </div>
-                    <?php endif; ?>
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .text-left { text-align: left; }
+        .text-justify { text-align: justify; }
+        .font-bold { font-weight: bold; }
+        .uppercase { text-transform: uppercase; }
+        .w-full { width: 100%; }
+        .align-top { vertical-align: top; }
+        .border-collapse { border-collapse: collapse; }
+        
+        .text-4xs { font-size: 6px; }
+        .text-3xs { font-size: 7px; }
+        .text-2xs { font-size: 8px; }
+        .text-tiny { font-size: 9px; }
+        .text-xs { font-size: 10px; }
+        .text-sm { font-size: 11px; }
+        .text-base { font-size: 12px; }
+        .text-lg { font-size: 13px; }
+        .text-xl { font-size: 15px; }
+        .text-2xl { font-size: 17px; }
+        .text-3xl { font-size: 20px; }
+        .text-4xl { font-size: 26px; }
+        
+        .max-w-60 { max-width: 60%; }
+        .max-w-70 { max-width: 70%; }
+        .max-w-80 { max-width: 80%; }
+        .max-w-85 { max-width: 85%; }
+        .max-w-100 { max-width: 100%; }
 
-                    <?php if($quotation->showSpecialNotes && $quotation->notes): ?>
-                        <div style="margin-bottom: 4px;">
-                           <div style="font-weight: bold;">Additional Terms:</div> <?php echo nl2br(e($quotation->notes)); ?>
+        .item-description {
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <footer>
+        <?php echo $__env->make('components.footer', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+        <script type="text/php">
+            if ( isset($pdf) ) {
+                $font = $fontMetrics->get_font("Times New Roman", "normal");
+                $pdf->page_text(500, 815, "Page {PAGE_NUM} of {PAGE_COUNT}", $font, 9, array(0,0,0));
+            }
+        </script>
+    </footer>
 
-                        </div>
-                    <?php endif; ?>
+    <!-- Main Quotation Section -->
+    <div class="header-container">
+        <?php echo $__env->make('components.header', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+    </div>
 
-                    <?php if($quotation->showValidTill && $quotation->validUntil): ?>
-                        <div style="margin-bottom: 4px;">
-                            <div style="font-weight: bold;">Price Valid Until:</div> <?php echo e($quotation->validUntil); ?>
-
-                        </div>
-                    <?php endif; ?>
-
-                    <?php if($quotation->showTermsOfPayment && $quotation->termsOfPayment): ?>
-                        <div style="margin-bottom: 4px;">
-                            <div style="font-weight: bold;">Terms of Payment:</div> <?php echo nl2br(e($quotation->termsOfPayment)); ?>
-
-                        </div>
-                    <?php endif; ?>
-
-                    <div style="margin-top: 8px;">
-                        <div style="font-weight: bold;">Notes:</div>
-                        1. Above quoted prices are subject to change in the event of changes in prevailing exchange rate, market conditions, duties, taxes and all other importation changes.<br>
-                        2. Prices are subject to change without prior notice.<br>
-                        3. Above quoted items are NON-CANCELABLE, once confirmed, order is placed.<br>
-                        4. Above quoted prices are VAT-inclusive.
-                    </div>
-                </td>
-                <td style="padding: 4px; border-top: 1.5px solid #000; border-right: 1.5px solid #000;"></td>
-                <td style="padding: 4px; border-top: 1.5px solid #000;"></td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+    <div class="content-container">
+        <?php echo $__env->make('components.quotation_table', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+    </div>
+</body>
+</html>
 <?php /**PATH C:\Projects\quotation-converter/resources/views/pdf.blade.php ENDPATH**/ ?>

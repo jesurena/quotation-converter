@@ -10,6 +10,70 @@
         font-size: 11px;
     }
 
+    @page {
+        margin: 100px 50px 100px 50px; /* top right bottom left */
+    }
+
+    header {
+        position: fixed;
+        top: -80px; /* adjust based on margin */
+        left: 0;
+        right: 0;
+        height: 80px;
+    }
+
+    footer {
+        position: fixed;
+        bottom: -80px;
+        left: 0;
+        right: 0;
+        height: 80px;
+    }
+
+    /* Force page breaks between sections */
+    .page {
+        page-break-after: always;
+    }
+
+    /* Hide header/footer for Terms page */
+    .no-header-footer header,
+    .no-header-footer footer {
+        display: none;
+    }
+
+    .no-header-footer {
+        page-break-before: always; /* ensure Terms starts on a new page */
+        margin: 50px; /* optional: smaller margin */
+        position: relative;
+    }
+
+    /* Reliable Dompdf hack: Mask fixed header/footer on this page with white boxes */
+    .no-header-footer::before {
+        content: "";
+        position: fixed;
+        top: -100px;
+        left: -50px;
+        right: -50px;
+        height: 100px;
+        background: white;
+        z-index: 1000;
+    }
+
+    .no-header-footer::after {
+        content: "";
+        position: fixed;
+        bottom: -100px;
+        left: -50px;
+        right: -50px;
+        height: 100px;
+        background: white;
+        z-index: 1000;
+    }
+
+    .pagenum:before {
+        content: counter(page);
+    }
+
     .p-1 { padding: 4px; }
     .p-2 { padding: 8px; }
     .p-3 { padding: 12px; }
@@ -77,3 +141,5 @@
         line-height: 1.4;
     }
 </style>
+
+<?php /**PATH C:\Projects\quotation-converter/resources/views/style.blade.php ENDPATH**/ ?>

@@ -14,14 +14,14 @@
                 1) their acquisition and choice to satisfy the Customer's intended
                 output, 2) their use, and 3) the output obtained there from.</p>
 
-                <p style="margin-top: 25px; margin-bottom: 10px;"><strong style="font-weight: bold;">PRICE SPECIFICATION</strong></p>
+                <p><strong style="font-weight: bold;">PRICE SPECIFICATION</strong></p>
                 <p>Every effort shall be made by ICSI to protect the prices stated herein. 
                 However, ICSI shall reserve the right to subject the quoted prices to 
                 change without prior notice in case of fortuitous events and prevailing
                 market conditions at the time of delivery (i.e. inflation, devaluation,
                 government impose rulings, deflation, etc.).</p>
 
-                <p style="margin-top: 25px; margin-bottom: 10px;"><strong style="font-weight: bold;">PAYMENT DELIVERY</strong></p>
+                <p><strong style="font-weight: bold;">PAYMENT DELIVERY</strong></p>
                 <p>Unless otherwise agreed upon in writing, payment for products shall be made:</p>
 
                 <?php if(in_array((int)$quotation->id, [1087338, 1088239, 1088235, 1088233, 1087339, 1088792, 1087341, 1088159, 1088155, 1088162])): ?>
@@ -45,7 +45,7 @@
                 <p>Delivery dates are approximate; ICSI shall not be liable for delay in 
                 delivery due to causes beyond its reasonable control.</p>
 
-                <p style="margin-top: 25px; margin-bottom: 10px;"><strong style="font-weight: bold;">WARRANTY</strong></p>
+                <p style=><strong style="font-weight: bold;">WARRANTY</strong></p>
                 <p>ICSI warrants that each new product sold shall be free from defects, 
                 flaws and damages in material, performance, workmanship and 
                 construction for a period of one (1) year or for periods as stated on the
@@ -65,13 +65,13 @@
                 or consequential damages arising from any 
                 breach of warranty.</p>
 
-                <p style="margin-top: 25px; margin-bottom: 10px;"><strong style="font-weight: bold;">PROGRAM PRODUCT LICENSES</strong></p>
+                <p><strong style="font-weight: bold;">PROGRAM PRODUCT LICENSES</strong></p>
                 <p>Any program products (software) listed on this agreement are not sold
                 and ownership of or title to program products does not pass to 
                 Customer. Customer purchases only a non-exclusive license to use 
                 program products (software).</p>
 
-                <p style="margin-top: 25px; margin-bottom: 10px;"><strong style="font-weight: bold;">DEFAULT</strong></p>
+                <p><strong style="font-weight: bold;">DEFAULT</strong></p>
                 <p>If the Customer fails to pay any amount due to ICSI or breaches any
                 of the terms of this agreement, 
                 ICSI may, in addition to any legal
@@ -94,7 +94,7 @@
                 rate per 
                 annum allowable by law shall be charged on all overdue accounts.</p>
 
-                <p style="font-weight: bold; padding-top: 25px;">MISCELLANEOUS</p>
+                <p style="font-weight: bold;">MISCELLANEOUS</p>
                 <p>No waiver, alteration, or modification of any of the provisions 
                 hereof
                 shall be binding upon ICSI unless in writing and signed by 

@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Quotation\Converter;
 
 use Illuminate\Contracts\View\Factory as ViewFactory;
-use Mpdf\Mpdf;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Quotation\Converter\Contracts\QuotationDataInterface;
 use Quotation\Converter\Data\QuotationData;
 
@@ -13,14 +14,14 @@ use Quotation\Converter\Data\QuotationData;
  * The main public API — a pure "Data → PDF" engine.
  *
  * This class NEVER touches any database. It accepts a QuotationData DTO
- * (or any implementor of QuotationDataInterface) and renders a PDF via mPDF.
+ * (or any implementor of QuotationDataInterface) and renders a PDF via Dompdf.
  */
 class Converter
 {
     private ?QuotationData $data = null;
 
-    /** Paper size (default: Letter). */
-    private string $paperSize = 'letter';
+    /** Paper size (default: A4). */
+    private string $paperSize = 'a4';
 
     /** Paper orientation. */
     private string $orientation = 'portrait';
@@ -175,53 +176,29 @@ class Converter
     }
 
     /**
-     * Convert the Blade templates into a PDF binary string via mPDF.
+     * Convert the Blade templates into a PDF binary string via Dompdf.
      */
     private function renderPdf(): string
     {
-        // 1. Initialize mPDF with default margins and paper size
-        $mpdf = new Mpdf([
-            'mode'          => 'utf-8',
-            'format'        => $this->paperSize,
-            'orientation'   => strtoupper(substr($this->orientation, 0, 1)),
-            'margin_left'   => 15,
-            'margin_right'  => 15,
-            'margin_top'    => 55, // Room for header
-            'margin_bottom' => 80, // Room for footer (increased to avoid overlap)
-            'margin_header' => 10,
-            'margin_footer' => 10,
-        ]);
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isRemoteEnabled', true);
+        $options->set('isPhpEnabled', true);
+        $options->set('defaultFont', 'Times New Roman');
 
-        $mpdf->SetTitle('Quotation ' . $this->data->id);
-        $mpdf->SetAuthor('Integrated Computer Systems, Inc.');
-
-        // 2. Prepare Header and Footer HTML
-        $headerHtml = $this->viewFactory->make('quotation-pkg::components.header', ['quotation' => $this->data])->render();
+        $dompdf = new Dompdf($options);
         
-        // Custom footer including page numbering via mPDF tokens
-        $footerHtml = $this->viewFactory->make('quotation-pkg::components.footer', ['quotation' => $this->data])->render();
-        $footerHtml .= '<div style="text-align: right; font-size: 9px; margin-top: 5px; font-family: \'Times New Roman\', serif;">Page {PAGENO} of {nbpg}</div>';
+        // Load the full unified HTML content
+        $html = $this->html();
+        $dompdf->loadHtml($html);
 
-        // 3. Set the repeating Header and Footer
-        $mpdf->SetHTMLHeader($headerHtml);
-        $mpdf->SetHTMLFooter($footerHtml);
+        // Set paper size and orientation
+        $dompdf->setPaper($this->paperSize, $this->orientation);
 
-        // 4. Render the Main Quotation Content (Table)
-        $mainHtml = $this->viewFactory->make('quotation-pkg::pdf', ['quotation' => $this->data])->render();
-        $mpdf->WriteHTML($mainHtml);
+        // Render the PDF
+        $dompdf->render();
 
-        // 5. Add the Terms & Conditions as a separate final page
-        // We clear them BEFORE adding the new page so mPDF applies the empty state to the new page
-        $mpdf->SetHTMLHeader('');
-        $mpdf->SetHTMLFooter('');
-        
-        // AddPage with suppression 'on' and 0 margins for header/footer
-        $mpdf->AddPage('P', '', '', '', 'on', 15, 15, 15, 15, 0, 0); 
-
-        $termsHtml = $this->viewFactory->make('quotation-pkg::pdf_terms', ['quotation' => $this->data])->render();
-        $mpdf->WriteHTML($termsHtml);
-
-        // 6. Return the raw PDF binary
-        return (string) $mpdf->Output('', \Mpdf\Output\Destination::STRING_RETURN);
+        // Return the raw PDF binary
+        return $dompdf->output();
     }
 }
